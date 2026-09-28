@@ -1,0 +1,17 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve,dirname,join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+const base=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const read=p=>readFileSync(join(base,p),'utf8');
+let html=read('index.html');
+const css=read('assets/style.css');
+const core=read('assets/core.mjs').replace(/^export /gm,'');
+const demo=read('assets/demo.mjs').replace(/^export /gm,'');
+const app=read('assets/app.mjs').replace(/^import .*?;\s*$/gm,'');
+const bundled=[core,demo,app].join('\n\n');
+if (bundled.includes('</script>') || css.includes('</style>')) throw Error('Elemento HTML inesperado no conteúdo');
+html=html.replace('<link rel="stylesheet" href="assets/style.css">','<style>\n'+css+'\n</style>');
+html=html.replace('<script type="module" src="assets/app.mjs"></script>','<script type="module">\n'+bundled+'\n</script>');
+const output=join(base,'SmartRoute_Demonstracao.html');
+writeFileSync(output,html);
+console.log('Gerado: '+output);

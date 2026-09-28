@@ -1,0 +1,17 @@
+id;cliente;descricao;segmento;grupo_local;bairro;cidade;latitude;longitude;prioridade;status;duracao_min;janela_inicio;janela_fim;data_limite;equipe
+ATD-001;Cliente Demonstração 01;Visita de rotina;Assistência técnica;UNIDADE-CENTRO;Centro;Rio de Janeiro;-22.9068;-43.1729;Alta;Pendente;45;08:00;12:00;2026-10-02;Equipe A
+ATD-002;Cliente Demonstração 02;Inspeção programada;Inspeção;UNIDADE-CENTRO;Centro;Rio de Janeiro;-22.9088;-43.1772;Média;Pendente;30;08:00;17:00;2026-10-06;Equipe A
+ATD-003;Cliente Demonstração 03;Atendimento técnico;Assistência técnica;UNIDADE-TIJUCA;Tijuca;Rio de Janeiro;-22.9249;-43.2324;Crítica;Pendente;60;08:00;13:00;2026-10-01;Equipe A
+ATD-004;Cliente Demonstração 04;Coleta de material;Logística;UNIDADE-TIJUCA;Tijuca;Rio de Janeiro;-22.9271;-43.2315;Alta;Pendente;25;09:00;16:00;2026-10-02;Equipe A
+ATD-005;Cliente Demonstração 05;Visita comercial;Visitas;UNIDADE-MARACANA;Maracanã;Rio de Janeiro;-22.9111;-43.2303;Baixa;Pendente;35;09:00;17:00;2026-10-09;Equipe A
+ATD-006;Cliente Demonstração 06;Instalação;Instalação;UNIDADE-VILA-ISABEL;Vila Isabel;Rio de Janeiro;-22.9166;-43.2440;Alta;Pendente;70;08:00;17:00;2026-10-04;Equipe A
+ATD-007;Cliente Demonstração 07;Revisão técnica;Assistência técnica;UNIDADE-GRAJAU;Grajaú;Rio de Janeiro;-22.9210;-43.2611;Média;Pendente;50;08:00;17:00;2026-10-08;Equipe A
+ATD-008;Cliente Demonstração 08;Inspeção;Inspeção;UNIDADE-CENTRO;Centro;Rio de Janeiro;-22.9079;-43.1759;Baixa;Pendente;30;08:00;17:00;2026-10-10;Equipe A
+ATD-009;Cliente Demonstração 09;Coleta;Logística;UNIDADE-BOTAFOGO;Botafogo;Rio de Janeiro;-22.9519;-43.1840;Crítica;Pendente;25;08:00;12:00;2026-10-01;Equipe B
+ATD-010;Cliente Demonstração 10;Visita preventiva;Assistência técnica;UNIDADE-FLAMENGO;Flamengo;Rio de Janeiro;-22.9365;-43.1770;Média;Pendente;45;09:00;17:00;2026-10-06;Equipe B
+ATD-011;Cliente Demonstração 11;Visita comercial;Visitas;UNIDADE-COPA;Copacabana;Rio de Janeiro;-22.9707;-43.1829;Baixa;Pendente;30;10:00;17:00;2026-10-12;Equipe B
+ATD-012;Cliente Demonstração 12;Inspeção de segurança;Inspeção;UNIDADE-COPA;Copacabana;Rio de Janeiro;-22.9693;-43.1896;Alta;Pendente;50;08:00;16:00;2026-10-04;Equipe B
+ATD-013;Cliente Demonstração 13;Instalação;Instalação;UNIDADE-LEBLON;Leblon;Rio de Janeiro;-22.9839;-43.2239;Média;Pendente;80;08:00;17:00;2026-10-07;Equipe B
+ATD-014;Cliente Demonstração 14;Atendimento técnico;Assistência técnica;UNIDADE-IPANEMA;Ipanema;Rio de Janeiro;-22.9834;-43.2044;Alta;Pendente;45;09:00;16:00;2026-10-02;Equipe B
+ATD-015;Cliente Demonstração 15;Serviço encerrado;Inspeção;UNIDADE-COPA;Copacabana;Rio de Janeiro;-22.9730;-43.1870;Média;Concluído;30;09:00;16:00;2026-09-23;Equipe B
+ATD-016;Cliente Demonstração 16;Serviço cancelado;Logística;UNIDADE-CENTRO;Centro;Rio de Janeiro;-22.9080;-43.1760;Baixa;Cancelado;20;08:00;17:00;2026-09-23;Equipe A
