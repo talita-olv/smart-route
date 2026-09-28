@@ -1,0 +1,19 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {join,resolve} from 'node:path';
+
+const root=resolve(fileURLToPath(new URL('../',import.meta.url)));
+test('todos os módulos da interface têm sintaxe JavaScript válida',()=>{
+  for(const path of ['assets/core.mjs','assets/demo.mjs','assets/app.mjs','scripts/build_standalone.mjs']){
+    assert.doesNotThrow(()=>execFileSync(process.execPath,['--check',join(root,path)],{cwd:root,stdio:'pipe'}),path);
+  }
+});
+test('elementos referenciados pelo painel existem no HTML',()=>{
+  const app=readFileSync(join(root,'assets/app.mjs'),'utf8');
+  const html=readFileSync(join(root,'index.html'),'utf8');
+  const ids=[...app.matchAll(/byId\('([^']+)'\)/g)].map(m=>m[1]);
+  for(const id of new Set(ids))assert.match(html,new RegExp('id="'+id+'"'),'Falta o elemento #'+id);
+});
