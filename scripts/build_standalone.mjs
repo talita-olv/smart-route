@@ -13,9 +13,9 @@ const app=read('assets/app.mjs').replace(/^import .*?;\s*$/gm,'');
 const bundled=[core,demo,app].join('\n\n');
 if(bundled.includes('</script>')||css.includes('</style>'))throw Error('Elemento HTML inesperado no código.');
 
-const stylesheet='<link rel="stylesheet" href="assets/style.css">';
+const stylesheet=/<link rel="stylesheet" href="assets\/style\.css(?:\?[^"]*)?">/;
 const scriptTag=/<script type="module" src="assets\/app\.mjs(?:\?[^"]*)?"><\/script>/;
-if(!html.includes(stylesheet)||!scriptTag.test(html))throw Error('Referências esperadas não encontradas em index.html.');
+if(!stylesheet.test(html)||!scriptTag.test(html))throw Error('Referências esperadas não encontradas em index.html.');
 html=html.replace(stylesheet,()=>'<style>\n'+css+'\n</style>');
 html=html.replace(scriptTag,()=>'<script type="module">\n'+bundled+'\n</script>');
 

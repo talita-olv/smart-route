@@ -9,4 +9,4 @@
 7. Conferir indisponibilidade de mapa/CDN: dados e cálculo devem continuar operáveis nos fluxos previstos.
 8. Não compartilhar base empresarial, credenciais, scripts internos nem publicar métricas de resultado sem evidências.
 
-Teste automatizado: `node --test tests/core.test.mjs`. O teste de navegador e a ativação do Pages são etapas separadas.
+Teste automatizado: `node --test tests/*.test.mjs`. O teste de navegador e a ativação do Pages são etapas separadas.

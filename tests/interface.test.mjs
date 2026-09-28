@@ -17,3 +17,6 @@ test('elementos referenciados pelo painel existem no HTML',()=>{
   const ids=[...app.matchAll(/byId\('([^']+)'\)/g)].map(m=>m[1]);
   for(const id of new Set(ids))assert.match(html,new RegExp('id="'+id+'"'),'Falta o elemento #'+id);
 });
+
+
+test('bibliotecas externas não bloqueiam carregamento inicial',()=>{const html=readFileSync(join(root,'index.html'),'utf8');const app=readFileSync(join(root,'assets/app.mjs'),'utf8');assert.doesNotMatch(html,/<script[^>]+src="https:\/\/(?:unpkg|cdn\.jsdelivr)/);assert.doesNotMatch(html,/fonts\.googleapis\.com/);assert.match(app,/IntersectionObserver/);assert.match(app,/function ensureXLSX/);assert.match(app,/function ensureLeaflet/);assert.match(html,/id="btn-load-map"/);});
