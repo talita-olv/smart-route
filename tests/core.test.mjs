@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {parseCSV,normalizeRecords,haversine,buildRoutes,exportProgramCSV} from '../assets/core.mjs';
+import {parseCSV,normalizeRecords,haversine,buildRoutes,exportProgramCSV,toCSV} from '../assets/core.mjs';
 import {DEMO} from '../assets/demo.mjs';
 test('parser CSV aceita ponto e vírgula e aspas',()=>{const raw=parseCSV('id;cliente;latitude;longitude\n"1";"Nome; exemplo";-22,9;-43,2\n');assert.equal(raw[0].cliente,'Nome; exemplo');assert.equal(normalizeRecords(raw).records[0].lat,-22.9);});
 test('rejeita ID duplicado e coordenadas ausentes',()=>{const {records,warnings}=normalizeRecords([{id:'A',latitude:'-22',longitude:'-43'},{id:'A',latitude:'-22',longitude:'-43'},{id:'B',latitude:'',longitude:'-43'}]);assert.equal(records.length,1);assert.equal(warnings.length,2);});
@@ -7,3 +7,5 @@ test('agrupa mesma unidade no mesmo dia e não duplica visitas',()=>{const {rout
 test('exclui serviços concluídos e cancelados',()=>{const extra=[{...DEMO[0],id:'DONE',status:'Concluído'},{...DEMO[0],id:'CANCEL',status:'Cancelado'}];const {routes}=buildRoutes([...DEMO,...extra]);assert.equal(routes.flatMap(r=>r.stops).length,DEMO.length);});
 test('gera distância e CSV exportável',()=>{assert.equal(haversine({lat:-22,lng:-43},{lat:-22,lng:-43}),0);const out=exportProgramCSV(buildRoutes(DEMO).routes);assert.match(out,/sequencia/);assert.match(out,/ATD-001/);});
 test('divide grupo acima da capacidade emitindo aviso',()=>{const group=Array.from({length:4},(_,i)=>({...DEMO[0],id:`X${i}`,grupo_local:'X',equipe:'Teste'}));const r=buildRoutes(group,{maxStops:2});assert.ok(r.warnings.length);assert.equal(r.routes.length,2);});
+
+test('exportação CSV protege texto de fórmulas de planilha',()=>{const csv=toCSV([{nome:'=HYPERLINK("https://exemplo.invalid","clique")',longitude:-43.2}],['nome','longitude']);assert.match(csv,/"'=HYPERLINK/);assert.match(csv,/"-43.2"/);});
