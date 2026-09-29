@@ -6,6 +6,12 @@
 
 **Status:** código disponibilizado neste repositório independente. Para visualizar como site, habilite GitHub Pages em Settings → Pages (main / root); confirme o endereço antes da divulgação.
 
+## Padrão obrigatório de desenvolvimento e deploy
+
+**Toda tarefa futura (Correção, Melhoria, Nova função ou Processo/Documentação) começa com uma [Issue](https://github.com/talita-olv/smart-route/issues), segue em branch própria e chega à `main` somente por [Pull Request](https://github.com/talita-olv/smart-route/pulls) com a Issue real citada na descrição (`Closes #N` ou `Refs #N`).** Testes, revisão e merge antecedem o deploy do GitHub Pages. Não fazer commits diretos na `main`.
+
+**Obrigatório para qualquer agente de IA, independentemente do modelo:** leia [AGENTS.md](AGENTS.md) antes de trabalhar; consulte [CONTRIBUTING.md](CONTRIBUTING.md) para o passo a passo. O template de PR e o CI verificam o vínculo à Issue.
+
 ## Para quem serve
 
 Assistência técnica, manutenção, instalações, inspeções, coletas, visitas comerciais ou qualquer operação que recebe uma relação de pontos/atendimentos e precisa organizá-la por equipe e dia. Os 14 atendimentos da demonstração são **inteiramente fictícios** e servem apenas para experimentar o fluxo.

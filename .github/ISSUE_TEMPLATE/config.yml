@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Orientações de contribuição
+    url: https://github.com/talita-olv/smart-route/blob/main/CONTRIBUTING.md
+    about: Leia o processo antes de abrir uma tarefa.

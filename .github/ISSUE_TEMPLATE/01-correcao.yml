@@ -1,0 +1,37 @@
+name: "Correção"
+description: "Registrar falha reproduzível ou regressão."
+title: "[Correção] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Comportamento observado
+      description: Descreva o erro sem anexar dados confidenciais.
+      placeholder: O que ocorreu e em qual tela ou fluxo?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Como reproduzir
+      placeholder: "1. Acesse...\n2. Faça...\n3. Ocorre..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite e teste de regressão
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Ambiente, impacto e evidências não sensíveis
+      description: Navegador, plataforma e versão. Nunca inclua tokens, credenciais ou dados de clientes.

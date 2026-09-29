@@ -1,0 +1,30 @@
+name: "Nova função"
+description: "Solicitar capacidade nova, fluxo ou integração."
+title: "[Nova função] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Problema e caso de uso
+      description: Quem precisa e para quê?
+    validations:
+      required: true
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Função proposta e requisitos
+      description: Inclua entradas, saídas, regras e limites conhecidos.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite e plano de testes
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependências, privacidade e autorização
+      description: Se houver extração de sistema externo, indique somente requisitos autorizados, sem compartilhar segredos.
