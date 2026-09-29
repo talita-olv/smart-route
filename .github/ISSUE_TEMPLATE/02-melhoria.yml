@@ -1,0 +1,30 @@
+name: "Melhoria"
+description: "Aprimorar qualidade, visual, manutenção, acessibilidade ou desempenho."
+title: "[Melhoria] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: current
+    attributes:
+      label: Situação atual
+      description: Qual problema ou fricção deve ser reduzida?
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Melhoria proposta
+      description: Descreva o que precisa mudar e o que fica fora do escopo.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite e validação
+      description: Como verificaremos o resultado?
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Riscos, dependências e observações
