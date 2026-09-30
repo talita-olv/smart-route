@@ -10,3 +10,15 @@
 8. Não compartilhar base empresarial, credenciais, scripts internos nem publicar métricas de resultado sem evidências.
 
 Teste automatizado: `node --test tests/*.test.mjs`. O teste de navegador e a ativação do Pages são etapas separadas.
+## Teste periódico do fluxo de governança
+
+Quando houver alteração no processo de contribuição ou nas regras da `main`, valide o fluxo completo em uma tarefa documental de baixo risco:
+
+1. abra uma Issue real e crie uma branch com o número da Issue;
+2. altere apenas documentação de validação ou governança;
+3. abra um PR para `main` com `Closes #N` ou `Refs #N` na descrição;
+4. confirme o check obrigatório `quality` e a validação da Issue;
+5. faça o merge somente após os checks;
+6. confirme o encerramento da Issue e a conclusão do deploy do GitHub Pages.
+
+Esse teste não deve contornar a Ruleset, usar commit direto na `main` nem introduzir dados operacionais. Registre o resultado na própria Issue/PR.
