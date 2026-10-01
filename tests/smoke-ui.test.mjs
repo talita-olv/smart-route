@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
 
 test('o painel inicializa, preenche o SVG e gera a rota sem CDNs',async()=>{
  class El{
@@ -34,4 +36,17 @@ test('o painel inicializa, preenche o SVG e gera a rota sem CDNs',async()=>{
  assert.ok(byId('results-body').children.length>=3);
  assert.equal(byId('geo-svg').children.filter(x=>x.cx!==undefined).length,40);
  assert.ok(!byId('street-map').children.length); // Nenhuma biblioteca externa foi requisitada
+ const csv=readFileSync(fileURLToPath(new URL('../exemplos/Modelo_SmartRoute.csv',import.meta.url)),'utf8');
+ const csvInput={name:'teste.csv',size:csv.length,text:async()=>csv};
+ await byId('file-input').listeners.change({target:{files:[csvInput],value:'teste.csv'}});
+ assert.equal(byId('kpi-all').textContent,48);
+ assert.ok(byId('notice').textContent.includes('48 registros importados'));
+ globalThis.window.XLSX={
+   read:()=>({SheetNames:['Atendimentos'],Sheets:{Atendimentos:{}}}),
+   utils:{sheet_to_json:()=>[{id:'XLSX-TESTE',latitude:-22.9,longitude:-43.2,regiao:'Sul',tipo_servico:'Inspeção'}]}
+ };
+ const excelInput={name:'teste.xlsx',size:1500,arrayBuffer:async()=>new ArrayBuffer(5)};
+ await byId('file-input').listeners.change({target:{files:[excelInput],value:'teste.xlsx'}});
+ assert.equal(byId('kpi-all').textContent,1);
+ assert.ok(byId('notice').textContent.includes('1 registros importados'));
 });
