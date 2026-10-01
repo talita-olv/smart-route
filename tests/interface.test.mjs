@@ -7,7 +7,7 @@ import {join,resolve} from 'node:path';
 
 const root=resolve(fileURLToPath(new URL('../',import.meta.url)));
 test('todos os módulos da interface têm sintaxe JavaScript válida',()=>{
-  for(const path of ['assets/core.mjs','assets/demo.mjs','assets/app.mjs','scripts/build_standalone.mjs']){
+  for(const path of ['assets/core.mjs','assets/demo.mjs','assets/geo.mjs','assets/app.mjs','scripts/build_standalone.mjs']){
     assert.doesNotThrow(()=>execFileSync(process.execPath,['--check',join(root,path)],{cwd:root,stdio:'pipe'}),path);
   }
 });
@@ -19,4 +19,4 @@ test('elementos referenciados pelo painel existem no HTML',()=>{
 });
 
 
-test('bibliotecas externas não bloqueiam carregamento inicial',()=>{const html=readFileSync(join(root,'index.html'),'utf8');const app=readFileSync(join(root,'assets/app.mjs'),'utf8');assert.doesNotMatch(html,/<script[^>]+src="https:\/\/(?:unpkg|cdn\.jsdelivr)/);assert.doesNotMatch(html,/fonts\.googleapis\.com/);assert.match(app,/IntersectionObserver/);assert.match(app,/function ensureXLSX/);assert.match(app,/function ensureLeaflet/);assert.match(html,/id="btn-load-map"/);});
+test('bibliotecas externas não bloqueiam carregamento inicial',()=>{const html=readFileSync(join(root,'index.html'),'utf8');const app=readFileSync(join(root,'assets/app.mjs'),'utf8');assert.doesNotMatch(html,/<script[^>]+src="https:\/\/(?:unpkg|cdn\.jsdelivr)/);assert.doesNotMatch(html,/fonts\.googleapis\.com/);assert.doesNotMatch(app,/IntersectionObserver/);assert.match(app,/renderQuickMap/);assert.match(html,/id="geo-svg"/);assert.match(app,/function ensureXLSX/);assert.match(app,/function ensureLeaflet/);assert.match(html,/id="btn-load-map"/);});
