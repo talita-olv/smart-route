@@ -25,3 +25,25 @@ jobs:
         run: node --test tests/*.test.mjs
       - name: Build standalone HTML
         run: node scripts/build_standalone.mjs
+  browser-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare isolated browser testing tools
+        run: |
+          npm install --prefix /tmp/smartroute-qa --no-audit --no-fund playwright@1.58.2
+          /tmp/smartroute-qa/node_modules/.bin/playwright install --with-deps chromium
+      - name: Validate desktop, mobile and application flows
+        env:
+          NODE_PATH: /tmp/smartroute-qa/node_modules
+        run: node scripts/check_browser.cjs
+      - name: Keep visual validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smartroute-browser-qa
+          path: qa-artifacts/
+          retention-days: 7
