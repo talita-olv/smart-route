@@ -1,5 +1,10 @@
 # Histórico de versões
 
+## 1.3.2 — 2026-10-01
+- Corrigida a área de resultados: a tabela volta a ter rolagem interna, mas agora preenche todo o espaço disponível no painel ao lado dos filtros.
+- Cabeçalho permanece fixo durante o deslizamento; desktop mantém painéis alinhados e mobile usa altura adaptada à viewport.
+
+
 ## 1.3.1 — 2026-10-01
 - Tabela de resultados cresce com as linhas, sem rolagem interna ou cabeçalho fixo.
 - Painéis sem esticamento artificial; colunas e textos adaptados ao desktop e celular.

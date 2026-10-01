@@ -21,20 +21,32 @@ const server=http.createServer((req,res)=>{
   page.on('pageerror',e=>errors.push(e.message));
   await page.goto(url);await page.waitForFunction(()=>document.querySelector('#kpi-all').textContent==='48');
   assert.equal(await page.locator('#geo-svg').count(),0);
-  async function checkTable(expected){
+  async function checkTable(expected,{desktop=false}={}){
    assert.equal(await page.locator('#table-body tr').count(),expected);
    const layout=await page.locator('.mini-table-wrap').evaluate(el=>{
     const css=getComputedStyle(el),th=getComputedStyle(el.querySelector('th'));
-    return {max:css.maxHeight,overflow:css.overflowY,sticky:th.position,full:el.scrollHeight<=el.clientHeight+1};
+    return {
+      max:css.maxHeight,overflow:css.overflowY,sticky:th.position,
+      client:el.clientHeight,scroll:el.scrollHeight,
+      wrapBottom:el.getBoundingClientRect().bottom,
+      panelBottom:el.closest('.map-panel').getBoundingClientRect().bottom
+    };
    });
-   assert.equal(layout.max,'none');assert.equal(layout.overflow,'visible');assert.equal(layout.sticky,'static');assert.ok(layout.full);
+   assert.equal(layout.overflow,'auto');assert.equal(layout.sticky,'sticky');
+   assert.ok(layout.client>=200,'A tabela deve ocupar o espaço disponível');
+   assert.ok(Math.abs(layout.panelBottom-layout.wrapBottom)<24,'A tabela deve chegar ao final útil do painel');
+   if(expected>=48)assert.ok(layout.scroll>layout.client,'A base completa deve deslizar dentro do espaço disponível');
+   if(desktop){
+    const [filters,mapPanel]=await Promise.all([page.locator('.filters').boundingBox(),page.locator('.map-panel').boundingBox()]);
+    assert.ok(Math.abs(filters.height-mapPanel.height)<3,'Painéis devem ter a mesma altura no desktop');
+   }
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Overflow horizontal');
-   return (await page.locator('.mini-table-wrap').boundingBox()).height;
+   return layout.client;
   }
-  const fullHeight=await checkTable(48);
-  await page.locator('#search').fill('Tijuca');assert.ok(await checkTable(8)<fullHeight);
-  await page.locator('#search').fill('sem-resultados-inexistente');await checkTable(0);
-  await page.locator('#btn-demo').click();await checkTable(48);
+  const fullHeight=await checkTable(48,{desktop:true});
+  await page.locator('#search').fill('Tijuca');assert.equal(await checkTable(8,{desktop:true}),fullHeight);
+  await page.locator('#search').fill('sem-resultados-inexistente');assert.equal(await checkTable(0,{desktop:true}),fullHeight);
+  await page.locator('#btn-demo').click();await checkTable(48,{desktop:true});
 
   await page.waitForFunction(()=>document.querySelector('#map-status').textContent==='Ruas disponíveis',{},{timeout:60000});
   await page.screenshot({path:path.join(root,'qa-artifacts/desktop.png'),fullPage:true});
