@@ -72,3 +72,33 @@ footer>div{max-width:560px}footer strong{display:block;color:#fff;font-size:13px
  .mini-table-wrap th,.mini-table-wrap td{padding:8px 3px;font-size:10px}
  .mini-table-wrap .priority{max-width:100%;padding:3px;font-size:9px}
 }
+
+
+/* Issue #11 — a tabela ocupa somente o espaço restante do painel e mantém rolagem. */
+.columns{align-items:stretch}
+.map-panel{display:flex;flex-direction:column;min-height:0}
+.mini-table-wrap{
+  flex:1 1 0;
+  min-height:220px;
+  max-height:none;
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-gutter:stable;
+  overscroll-behavior:contain;
+}
+.mini-table-wrap table{table-layout:fixed}
+.mini-table-wrap thead th{
+  position:sticky;
+  top:0;
+  z-index:2;
+  background:#f5f7f3;
+}
+@media(max-width:900px){
+  .columns{align-items:start}
+  .map-panel{display:block}
+  .mini-table-wrap{
+    min-height:240px;
+    max-height:min(55vh,420px);
+    overflow-y:auto;
+  }
+}
