@@ -47,3 +47,14 @@ main{max-width:1300px}.hero{background:transparent;color:var(--ink);border-radiu
 .demo-scope{background:#e8eee6;border:1px solid #d6e2d7;border-radius:5px;padding:27px 32px;margin:30px 0;display:grid;gap:10px}.demo-scope h2{font-size:25px;margin:4px 0 9px}.demo-scope p{max-width:850px;line-height:1.65}
 .scope-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0}.scope-grid article{background:#f9fbf7;border:1px solid #d6e1d5;border-radius:4px;padding:16px;display:grid;gap:8px}.scope-grid strong{font-size:13px}.scope-grid span,.scope-note{font-size:11px;color:#586e5f}.scope-contact{display:inline-flex;width:max-content;background:#fff!important}
 @media(max-width:1060px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:670px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.scope-grid{grid-template-columns:1fr}.demo-scope{padding:21px}.map-tools{align-items:flex-start;flex-direction:column}#street-map{height:320px;min-height:320px}}
+
+/* Dados derivados da seleção atual, sem biblioteca de gráficos */
+.insights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 18px}
+.insight{background:#fff;border:1px solid #dce4da;border-radius:5px;padding:15px 18px}
+.insight header{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:11px}
+.insight strong{font-size:12px;color:#274535}.insight header span{font-size:10px;color:#839184}
+.bar-list{display:grid;gap:6px}.bar-row{display:grid;grid-template-columns:86px minmax(0,1fr) 23px;align-items:center;gap:10px;font-size:10px;color:#566659}
+.bar-row b{text-align:right;font-variant-numeric:tabular-nums;color:#304337}.bar-track{height:7px;border-radius:4px;overflow:hidden;background:#edf1ed}
+.bar-fill{display:block;height:100%;min-width:0;background:#5e866b;border-radius:4px}.bar-fill.critica{background:#ac5649}.bar-fill.alta{background:#b78a4d}.bar-fill.media{background:#7b8b53}.bar-fill.baixa{background:#7fa78a}
+.bar-fill.pendente{background:#658779}.bar-fill.programado{background:#58799d}.bar-fill.concluido{background:#719b63}.bar-fill.cancelado{background:#be7e6c}
+@media(max-width:690px){.insights{grid-template-columns:1fr}.insight{padding:13px}}
