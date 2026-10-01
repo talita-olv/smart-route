@@ -2,13 +2,22 @@
 
 **Desenvolvido por Talita Souza. © 2026 Talita Souza. Todos os direitos reservados.**
 
+## Acessar o SmartRoute
+
+### **[ABRIR A DEMONSTRAÇÃO ONLINE ↗](https://talita-olv.github.io/smart-route/)**
+
+Acesse diretamente no navegador. Experimente os **48 atendimentos fictícios**, ajuste filtros e equipes, visualize a distribuição no mapa de ruas, gere uma programação sugerida e exporte o resultado em CSV. Você também pode baixar a [planilha modelo Excel](exemplos/Modelo_SmartRoute.xlsx) para testar a importação.
+
+*Esta é uma versão demonstrativa de uma solução desenvolvida por Talita Souza. Integrações com sistemas e regras específicas de cada negócio podem ser desenvolvidas sob medida. As distâncias da programação são estimativas geográficas em linha reta, não percursos viários.*
+
+
 **Uso restrito:** cópia, modificação, redistribuição e uso comercial do código e dos materiais próprios exigem autorização prévia e por escrito da autora, ressalvadas permissões legais e os termos de terceiros/GitHub. Acesso público não significa licença permissiva. A avaliação da demonstração e o preenchimento dos modelos são permitidos conforme [LICENSE.md](LICENSE.md). Crédito à autora não substitui autorização. Os avisos não garantem proteção absoluta contra cópia.
 
 **Da planilha à sugestão de roteiros.** Projeto demonstrativo independente de portfólio por **Talita Souza**. O SmartRoute organiza demandas de campo em sugestões de programação por equipe, localização e prioridade. Seu ponto de partida é um modelo genérico; extrações e regras comerciais podem ser desenvolvidas individualmente para cada negócio.
 
-**[Experimentar exemplo na interface](index.html)** · **[Baixar modelo Excel](exemplos/Modelo_SmartRoute.xlsx)** · **[Baixar exemplo CSV](exemplos/Modelo_SmartRoute.csv)** · **[Como publicar](docs/PUBLICAR.md)**
+**[Abrir ferramenta online](https://talita-olv.github.io/smart-route/)** · **[Modelo Excel](exemplos/Modelo_SmartRoute.xlsx)** · **[Exemplo CSV](exemplos/Modelo_SmartRoute.csv)** · **[Como publicar](docs/PUBLICAR.md)**
 
-**Demonstração:** [SmartRoute](https://talita-olv.github.io/smart-route/) · desenvolvido por Talita Souza. Publicação via GitHub Pages após merge na `main`.
+**Publicação:** GitHub Pages, branch `main`, após merge de Pull Request. A versão pública está no link em destaque acima.
 
 ## Padrão obrigatório de desenvolvimento e deploy
 
