@@ -26,7 +26,13 @@ Esse teste não deve contornar a Ruleset, usar commit direto na `main` nem intro
 ## Verificação V1.2 · Issue #5
 - [ ] CSV e XLSX têm 22 cabeçalhos compatíveis e 48 exemplos fictícios.
 - [ ] Filtros adicionais, horas e exportação enriquecida funcionam.
-- [ ] SVG é preenchido sem CDN; ruas apenas por clique.
+- [ ] Mapa de ruas inicia automaticamente; falha de CDN mostra aviso e permite nova tentativa, sem impedir CSV/roteirização.
 - [ ] Sem rede, a geração de rotas e CSV permanecem disponíveis.
-- [ ] Seleção destaca rota e retorno da visualização de ruas é possível.
+- [ ] Seleção destaca rota no mapa de ruas; não há alternância para SVG.
 - [ ] Limites públicos estão explícitos e campos meramente informativos não são promovidos como restrições.
+
+## Branding e autoria V1.3
+
+- [ ] Logo técnica, autoria de Talita Souza no cabeçalho/início/rodapé, termos acessíveis.
+- [ ] Desktop e móvel sem overflow; contraste e avisos de mapa legíveis.
+- [ ] Restrições de uso explícitas e sem promessa de proteção absoluta.

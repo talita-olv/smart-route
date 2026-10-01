@@ -1,5 +1,11 @@
 # Histórico de versões
 
+## 1.3 — 2026-10-01
+- Mapa de ruas como única visualização, com carregamento automático, erro e nova tentativa; removido diagrama/SVG geográfico.
+- Logo de circuito de rota sobre malha técnica, com autoria visível de Talita Souza no início, cabeçalho, mensagens e rodapé.
+- Termos restritivos e README: © 2026 Talita Souza, todos os direitos reservados, usos sujeitos a autorização escrita, respeitando direitos legais, GitHub e terceiros.
+- Preservados importação, filtros, programação e exportação; sem promessa de proteção absoluta contra cópia.
+
 ## 1.2.0 · Demonstração comercial ampliada
 
 - 48 casos fictícios, 12 grupos locais, 3 equipes e 22 campos no contrato público.
