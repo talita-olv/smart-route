@@ -9,3 +9,10 @@ test('gera distância e CSV exportável',()=>{assert.equal(haversine({lat:-22,ln
 test('divide grupo acima da capacidade emitindo aviso',()=>{const group=Array.from({length:4},(_,i)=>({...DEMO[0],id:`X${i}`,grupo_local:'X',equipe:'Teste'}));const r=buildRoutes(group,{maxStops:2});assert.ok(r.warnings.length);assert.equal(r.routes.length,2);});
 
 test('exportação CSV protege texto de fórmulas de planilha',()=>{const csv=toCSV([{nome:'=HYPERLINK("https://exemplo.invalid","clique")',longitude:-43.2}],['nome','longitude']);assert.match(csv,/"'=HYPERLINK/);assert.match(csv,/"-43.2"/);});
+
+test('novos campos informativos da base são preservados na importação e exportação',()=>{
+ const raw={id:'T-001',cliente:'Cliente fictício',latitude:'-22,91',longitude:'-43,21',tipo_servico:'Instalação',endereco_referencia:'Ponto ilustrativo',regiao:'Sul',data_solicitacao:'2026-09-28',observacao:'Sem dado pessoal',canal_origem:'Portal',status:'Pendente',equipe:'Equipe A'};
+ const row=normalizeRecords([raw]).records[0];assert.equal(row.tipo_servico,'Instalação');assert.equal(row.regiao,'Sul');
+ const csv=exportProgramCSV(buildRoutes([row]).routes);assert.match(csv,/tipo_servico/);assert.match(csv,/Ponto ilustrativo/);
+});
+test('demonstração contém 48 atendimentos em três equipes e dados fictícios',()=>{assert.equal(DEMO.length,48);assert.equal(new Set(DEMO.map(x=>x.id)).size,48);assert.equal(new Set(DEMO.map(x=>x.equipe)).size,3);assert.ok(DEMO.every(x=>x.endereco_referencia.includes('ilustrativo')));});
