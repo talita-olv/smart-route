@@ -1,5 +1,10 @@
 # Histórico de versões
 
+## 1.3.1 — 2026-10-01
+- Tabela de resultados cresce com as linhas, sem rolagem interna ou cabeçalho fixo.
+- Painéis sem esticamento artificial; colunas e textos adaptados ao desktop e celular.
+- Exibição completa dos até 120 registros permitidos na demonstração.
+
 ## 1.3 — 2026-10-01
 - Mapa de ruas como única visualização, com carregamento automático, erro e nova tentativa; removido diagrama/SVG geográfico.
 - Logo de circuito de rota sobre malha técnica, com autoria visível de Talita Souza no início, cabeçalho, mensagens e rodapé.
