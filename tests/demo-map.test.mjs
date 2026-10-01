@@ -2,19 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
-import {geoProject} from '../assets/geo.mjs';
 import {DEMO} from '../assets/demo.mjs';
 import {parseCSV,buildRoutes,HEADERS,normalizeRecords} from '../assets/core.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
-test('projeção SVG usa coordenadas sem rede e cabe nos limites',()=>{
- const p=geoProject(DEMO),points=DEMO.map(x=>p.point(x));
- assert.ok(points.every(v=>v.x>=0&&v.x<=900&&v.y>=0&&v.y<=445));
- assert.notDeepEqual(points[0],points.at(-1));
-});
-test('projeção mantém ponto visível quando todos compartilham coordenadas',()=>{
- const p=geoProject([{lat:-22.9,lng:-43.2},{lat:-22.9,lng:-43.2}]);
- assert.deepEqual(p.point({lat:-22.9,lng:-43.2}),{x:450,y:222.5});
-});
 test('CSV e demo possuem 48 registros e o mesmo contrato de 22 colunas',()=>{
  const csv=readFileSync(root+'exemplos/Modelo_SmartRoute.csv','utf8');
  const names=csv.replace(/^\uFEFF/,'').split(/\r?\n/)[0].split(';').map(x=>x.replaceAll('"',''));
@@ -26,9 +16,10 @@ test('CSV e demo possuem 48 registros e o mesmo contrato de 22 colunas',()=>{
  const ids=routes.flatMap(r=>r.stops.map(s=>s.id));
  assert.equal(new Set(ids).size,ids.length);assert.ok(routes.every(r=>r.stops.length<=8));
 });
-test('HTML usa mapa SVG como padrão e ruas somente por ação',()=>{
+test('mapa de ruas é a única visualização e inicia sem bloquear o painel',()=>{
  const app=readFileSync(root+'assets/app.mjs','utf8'),html=readFileSync(root+'index.html','utf8');
- assert.match(html,/id="geo-svg"/);assert.match(html,/id="street-map"/);
- assert.match(app,/renderQuickMap\(data\)/);assert.match(app,/function startMap\(/);
- assert.doesNotMatch(app,/IntersectionObserver/);assert.match(html,/Mapa de ruas \(opcional\)/);
+ assert.match(html,/id="street-map"/);assert.match(html,/id="map-message"/);
+ assert.doesNotMatch(html,/geo-svg|btn-quick-map|visão rápida|ruas \(opcional\)/i);
+ assert.doesNotMatch(app,/geoProject|renderQuickMap|backToQuick/);
+ assert.match(app,/void startMap\(\);/);assert.match(app,/tiles.redraw\(\)/);
 });

@@ -7,7 +7,7 @@ import {join,resolve} from 'node:path';
 
 const root=resolve(fileURLToPath(new URL('../',import.meta.url)));
 test('todos os módulos da interface têm sintaxe JavaScript válida',()=>{
-  for(const path of ['assets/core.mjs','assets/demo.mjs','assets/geo.mjs','assets/app.mjs','scripts/build_standalone.mjs']){
+  for(const path of ['assets/core.mjs','assets/demo.mjs','assets/app.mjs','scripts/build_standalone.mjs']){
     assert.doesNotThrow(()=>execFileSync(process.execPath,['--check',join(root,path)],{cwd:root,stdio:'pipe'}),path);
   }
 });
@@ -19,4 +19,13 @@ test('elementos referenciados pelo painel existem no HTML',()=>{
 });
 
 
-test('bibliotecas externas não bloqueiam carregamento inicial',()=>{const html=readFileSync(join(root,'index.html'),'utf8');const app=readFileSync(join(root,'assets/app.mjs'),'utf8');assert.doesNotMatch(html,/<script[^>]+src="https:\/\/(?:unpkg|cdn\.jsdelivr)/);assert.doesNotMatch(html,/fonts\.googleapis\.com/);assert.doesNotMatch(app,/IntersectionObserver/);assert.match(app,/renderQuickMap/);assert.match(html,/id="geo-svg"/);assert.match(app,/function ensureXLSX/);assert.match(app,/function ensureLeaflet/);assert.match(html,/id="btn-load-map"/);});
+test('bibliotecas externas não bloqueiam carregamento inicial',()=>{const html=readFileSync(join(root,'index.html'),'utf8');const app=readFileSync(join(root,'assets/app.mjs'),'utf8');assert.doesNotMatch(html,/<script[^>]+src="https:\/\/(?:unpkg|cdn\.jsdelivr)/);assert.doesNotMatch(html,/fonts\.googleapis\.com/);assert.doesNotMatch(app,/IntersectionObserver/);assert.doesNotMatch(app,/renderQuickMap/);assert.match(html,/id="street-map"/);assert.match(app,/function ensureXLSX/);assert.match(app,/function ensureLeaflet/);assert.match(html,/id="btn-load-map"/);});
+
+test('autoria e termos de uso são explícitos e preservam avaliação e terceiros',()=>{
+ const html=readFileSync(join(root,'index.html'),'utf8'),license=readFileSync(join(root,'LICENSE.md'),'utf8'),readme=readFileSync(join(root,'README.md'),'utf8');
+ assert.match(html,/<title>SmartRoute \| Desenvolvido por Talita Souza<\/title>/);
+ assert.match(html,/class="author-signature">Projeto desenvolvido por <strong>Talita Souza/);
+ assert.match(html,/<footer>[\s\S]*Desenvolvido por Talita Souza[\s\S]*Todos os direitos reservados/);
+ for(const text of [license,readme]){assert.match(text,/Talita Souza/);assert.match(text,/Todos os direitos reservados/);assert.match(text,/autorização prévia e por escrito/);}
+ assert.match(license,/termos do GitHub/);assert.match(license,/THIRD_PARTY_NOTICES/);assert.match(license,/não constituem mecanismo técnico de bloqueio/);
+});

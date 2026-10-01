@@ -40,13 +40,12 @@ main{max-width:1300px}.hero{background:transparent;color:var(--ink);border-radiu
 .map-tools button{border-radius:4px;padding:7px 10px;font-size:11px;min-height:32px;background:#fff;border:1px solid #cad8cc;color:#244f3c;cursor:pointer}
 .map-tools button:hover{background:#e9f1e8}
 #map{height:auto;min-height:370px;background:#e8efe8;border:1px solid #d4e0d4;border-radius:5px;overflow:hidden;position:relative}
-#geo-svg{display:block;width:100%;height:auto;min-height:300px;aspect-ratio:900/445;background:linear-gradient(120deg,#eef3ec,#e0eae0)}
 #street-map{width:100%;height:370px;min-height:370px;background:#e6eee5}
-#street-map[hidden],#geo-svg[hidden],.map-tools button[hidden]{display:none!important}
+.map-tools button[hidden]{display:none!important}
 .geo-legend{display:flex;gap:10px 16px;flex-wrap:wrap;margin:9px 0 2px;font-size:10px;color:#53675a}.geo-legend span{display:inline-flex;align-items:center;gap:6px}.geo-legend i{display:inline-block;width:8px;height:8px;border-radius:50%}
 .demo-scope{background:#e8eee6;border:1px solid #d6e2d7;border-radius:5px;padding:27px 32px;margin:30px 0;display:grid;gap:10px}.demo-scope h2{font-size:25px;margin:4px 0 9px}.demo-scope p{max-width:850px;line-height:1.65}
 .scope-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0}.scope-grid article{background:#f9fbf7;border:1px solid #d6e1d5;border-radius:4px;padding:16px;display:grid;gap:8px}.scope-grid strong{font-size:13px}.scope-grid span,.scope-note{font-size:11px;color:#586e5f}.scope-contact{display:inline-flex;width:max-content;background:#fff!important}
-@media(max-width:1060px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:670px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.scope-grid{grid-template-columns:1fr}.demo-scope{padding:21px}.map-tools{align-items:flex-start;flex-direction:column}#street-map{height:320px;min-height:320px}}
+@media(max-width:1060px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:670px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.scope-grid{grid-template-columns:1fr}.demo-scope{padding:21px}.map-tools{align-items:flex-start;flex-direction:column}#map{min-height:320px}#street-map{height:320px;min-height:320px}}
 
 /* Dados derivados da seleção atual, sem biblioteca de gráficos */
 .insights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 18px}
@@ -58,3 +57,10 @@ main{max-width:1300px}.hero{background:transparent;color:var(--ink);border-radiu
 .bar-fill{display:block;height:100%;min-width:0;background:#5e866b;border-radius:4px}.bar-fill.critica{background:#ac5649}.bar-fill.alta{background:#b78a4d}.bar-fill.media{background:#7b8b53}.bar-fill.baixa{background:#7fa78a}
 .bar-fill.pendente{background:#658779}.bar-fill.programado{background:#58799d}.bar-fill.concluido{background:#719b63}.bar-fill.cancelado{background:#be7e6c}
 @media(max-width:690px){.insights{grid-template-columns:1fr}.insight{padding:13px}}
+/* Identidade autoral: circuito de rota sobre malha técnica. */
+.brandmark{width:48px;height:48px;display:grid;place-items:center;background:#203f32;border:1px solid #39634c;border-radius:8px;flex-shrink:0;color:#d9edc7}
+.brandmark svg{width:42px;height:42px;fill:none}.brandmark .brand-grid{stroke:#93b293;stroke-width:.5;opacity:.3}.brandmark .brand-route,.brandmark .brand-end{stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}.brandmark circle{fill:#d9edc7;stroke:#203f32;stroke-width:1}
+.author-signature{border-left:3px solid #73945b;padding:2px 0 2px 13px;margin:20px 0;color:#254b39!important;font-size:15px!important}.author-signature strong{font-weight:800}.author-signature span{display:block;margin-top:4px;font-size:11px;color:#607560}
+.hero .hero-note{color:#526653}.map-message{position:absolute;inset:0;z-index:500;margin:0;padding:28px;display:grid;place-content:center;text-align:center;background:#edf2ea;color:#425a48;line-height:1.8}.map-message[hidden]{display:none}
+footer>div{max-width:560px}footer strong{display:block;color:#fff;font-size:13px}footer p{line-height:1.7;margin:6px 0}footer a{color:#d9edc7;text-decoration:underline}
+@media(max-width:480px){.topbar{height:auto;min-height:80px;gap:12px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}.brand-word{font-size:21px}.scope-contact{width:auto;max-width:100%;white-space:normal}.map-tools button{width:100%}}
