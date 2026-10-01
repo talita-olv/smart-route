@@ -1,5 +1,14 @@
 # Histórico de versões
 
+## 1.2.0 · Demonstração comercial ampliada
+
+- 48 casos fictícios, 12 grupos locais, 3 equipes e 22 campos no contrato público.
+- Visão geográfica SVG instantânea; mapa de ruas opcional por clique.
+- Indicadores adicionais, filtros e exportação com contexto ampliado.
+- Limite público de 120 registros e 12 paradas por rota; recursos sob medida apresentados separadamente.
+
+# Histórico de versões
+
 ## 1.1.0 · Identidade operacional e carregamento progressivo
 
 - Direção visual mais sóbria: superfícies claras, verde mineral e fontes do sistema.

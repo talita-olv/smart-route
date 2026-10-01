@@ -1,6 +1,7 @@
 /** SmartRoute Demo: funções puras, sem ligação com sistemas corporativos. */
-export const HEADERS = ['id','cliente','descricao','segmento','grupo_local','bairro','cidade','latitude','longitude','prioridade','status','duracao_min','janela_inicio','janela_fim','data_limite','equipe'];
+export const HEADERS = ['id','cliente','descricao','segmento','grupo_local','bairro','cidade','latitude','longitude','prioridade','status','duracao_min','janela_inicio','janela_fim','data_limite','equipe','tipo_servico','endereco_referencia','regiao','data_solicitacao','observacao','canal_origem'];
 const aliases = {
+ tipo_servico:['tipo_servico','natureza_servico','servico_tipo'], endereco_referencia:['endereco_referencia','referencia','endereco'],regiao:['regiao','zona'],data_solicitacao:['data_solicitacao','solicitado_em'],observacao:['observacao','notas'],canal_origem:['canal_origem','origem'],
  id:['id','codigo','ordem','chamado'], cliente:['cliente','local','nome'], descricao:['descricao','atividade','servico'],
  segmento:['segmento','categoria'], grupo_local:['grupo_local','grupo','unidade','planta'], bairro:['bairro'], cidade:['cidade','municipio'],
  latitude:['latitude','lat'], longitude:['longitude','lng','lon'], prioridade:['prioridade','criticidade'],
@@ -28,7 +29,7 @@ export function normalizeRecords(raw){const records=[], warnings=[], ids=new Set
  if(!Number.isFinite(lat)||!Number.isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180||(!lat&&!lng)){warnings.push(`Linha ${line} (${id}): coordenadas ausentes ou inválidas; ignorada.`);continue;}
  ids.add(id);records.push({id,cliente:get(raw[i],'cliente')||`Atendimento ${id}`,descricao:get(raw[i],'descricao'),segmento:get(raw[i],'segmento')||'Serviços',grupo_local:get(raw[i],'grupo_local')||id,
  bairro:get(raw[i],'bairro'),cidade:get(raw[i],'cidade'),lat,lng,prioridade:priority(get(raw[i],'prioridade')),status:state(get(raw[i],'status')),
- duracao_min:Math.max(0,number(get(raw[i],'duracao_min'))||0),janela_inicio:get(raw[i],'janela_inicio'),janela_fim:get(raw[i],'janela_fim'),data_limite:get(raw[i],'data_limite'),equipe:get(raw[i],'equipe')||'Equipe não definida'});}
+ tipo_servico:get(raw[i],'tipo_servico')||get(raw[i],'descricao')||'Serviço externo',endereco_referencia:get(raw[i],'endereco_referencia'),regiao:get(raw[i],'regiao'),data_solicitacao:get(raw[i],'data_solicitacao'),observacao:get(raw[i],'observacao'),canal_origem:get(raw[i],'canal_origem'),duracao_min:Math.max(0,number(get(raw[i],'duracao_min'))||0),janela_inicio:get(raw[i],'janela_inicio'),janela_fim:get(raw[i],'janela_fim'),data_limite:get(raw[i],'data_limite'),equipe:get(raw[i],'equipe')||'Equipe não definida'});}
  return {records,warnings};}
 export const haversine=(a,b)=>{const R=6371,dLat=(b.lat-a.lat)*Math.PI/180,dLng=(b.lng-a.lng)*Math.PI/180;const s=Math.sin(dLat/2)**2+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLng/2)**2;return 2*R*Math.asin(Math.min(1,Math.sqrt(s)));};
 const priorityRank={Crítica:0,Alta:1,Média:2,Baixa:3};
@@ -50,4 +51,4 @@ export function buildRoutes(records,{start={lat:-22.9068,lng:-43.1729},maxStops=
  }}return {routes:routeList,warnings};}
 const quote=v=>{let value=String(v??'');if(typeof v==='string'&&/^[\s]*[=+@-]/.test(value))value="'"+value;return `"${value.replaceAll('\"','\"\"')}"`;};
 export function toCSV(rows,headers){return '\uFEFF'+[headers.map(quote).join(';'),...rows.map(r=>headers.map(h=>quote(r[h])).join(';'))].join('\r\n');}
-export function exportProgramCSV(routes){return toCSV(routes.flatMap(r=>r.stops.map((s,i)=>({rota:r.id,data:r.data,equipe:r.equipe,sequencia:i+1,id:s.id,cliente:s.cliente,descricao:s.descricao,grupo_local:s.grupo_local,cidade:s.cidade,bairro:s.bairro,latitude:s.lat,longitude:s.lng,prioridade:s.prioridade,duracao_min:s.duracao_min}))),['rota','data','equipe','sequencia','id','cliente','descricao','grupo_local','cidade','bairro','latitude','longitude','prioridade','duracao_min']);}
+export function exportProgramCSV(routes){return toCSV(routes.flatMap(r=>r.stops.map((s,i)=>({rota:r.id,data:r.data,equipe:r.equipe,sequencia:i+1,id:s.id,cliente:s.cliente,descricao:s.descricao,tipo_servico:s.tipo_servico,segmento:s.segmento,grupo_local:s.grupo_local,endereco_referencia:s.endereco_referencia,bairro:s.bairro,cidade:s.cidade,regiao:s.regiao,latitude:s.lat,longitude:s.lng,prioridade:s.prioridade,status:s.status,duracao_min:s.duracao_min,janela_inicio:s.janela_inicio,janela_fim:s.janela_fim,data_solicitacao:s.data_solicitacao,data_limite:s.data_limite,canal_origem:s.canal_origem,observacao:s.observacao}))),['rota','data','equipe','sequencia',...HEADERS]);}

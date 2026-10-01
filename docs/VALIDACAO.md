@@ -22,3 +22,11 @@ Quando houver alteração no processo de contribuição ou nas regras da `main`,
 6. confirme o encerramento da Issue e a conclusão do deploy do GitHub Pages.
 
 Esse teste não deve contornar a Ruleset, usar commit direto na `main` nem introduzir dados operacionais. Registre o resultado na própria Issue/PR.
+
+## Verificação V1.2 · Issue #5
+- [ ] CSV e XLSX têm 22 cabeçalhos compatíveis e 48 exemplos fictícios.
+- [ ] Filtros adicionais, horas e exportação enriquecida funcionam.
+- [ ] SVG é preenchido sem CDN; ruas apenas por clique.
+- [ ] Sem rede, a geração de rotas e CSV permanecem disponíveis.
+- [ ] Seleção destaca rota e retorno da visualização de ruas é possível.
+- [ ] Limites públicos estão explícitos e campos meramente informativos não são promovidos como restrições.
