@@ -21,6 +21,21 @@ const server=http.createServer((req,res)=>{
   page.on('pageerror',e=>errors.push(e.message));
   await page.goto(url);await page.waitForFunction(()=>document.querySelector('#kpi-all').textContent==='48');
   assert.equal(await page.locator('#geo-svg').count(),0);
+  async function checkTable(expected){
+   assert.equal(await page.locator('#table-body tr').count(),expected);
+   const layout=await page.locator('.mini-table-wrap').evaluate(el=>{
+    const css=getComputedStyle(el),th=getComputedStyle(el.querySelector('th'));
+    return {max:css.maxHeight,overflow:css.overflowY,sticky:th.position,full:el.scrollHeight<=el.clientHeight+1};
+   });
+   assert.equal(layout.max,'none');assert.equal(layout.overflow,'visible');assert.equal(layout.sticky,'static');assert.ok(layout.full);
+   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Overflow horizontal');
+   return (await page.locator('.mini-table-wrap').boundingBox()).height;
+  }
+  const fullHeight=await checkTable(48);
+  await page.locator('#search').fill('Tijuca');assert.ok(await checkTable(8)<fullHeight);
+  await page.locator('#search').fill('sem-resultados-inexistente');await checkTable(0);
+  await page.locator('#btn-demo').click();await checkTable(48);
+
   await page.waitForFunction(()=>document.querySelector('#map-status').textContent==='Ruas disponíveis',{},{timeout:60000});
   await page.screenshot({path:path.join(root,'qa-artifacts/desktop.png'),fullPage:true});
   await page.locator('#btn-route').click();assert.equal(await page.locator('.route-card').count(),6);
@@ -38,6 +53,7 @@ const server=http.createServer((req,res)=>{
   for(const width of [390,320]){
    await page.setViewportSize({width,height:844});
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Overflow em '+width+'px');
+   await checkTable(48);
    await page.locator('#btn-route').click();assert.equal(await page.locator('.route-card').count(),6);
    await page.screenshot({path:path.join(root,'qa-artifacts/mobile-'+width+'.png'),fullPage:true});
   }
