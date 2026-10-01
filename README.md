@@ -90,6 +90,8 @@ node --test tests/*.test.mjs
 
 Os testes automatizados cobrem leitura CSV, duplicatas, coordenadas, grupos, status, limite diário, exportação, proteção básica contra fórmulas em CSV e verificação de sintaxe, elementos da interface, mapa de ruas, falha/nova tentativa e carregamento do leitor Excel sob demanda. Uma demonstração visual no navegador e os fluxos de importação devem ser conferidos antes da divulgação; consulte [Validação](docs/VALIDACAO.md).
 
+O workflow **Verify SmartRoute** também executa `scripts/check_browser.cjs` no job `browser-qa`: desktop, 390/320 px, importação CSV/XLSX, filtros, geração, exportação e recuperação do mapa. O Playwright é instalado somente no ambiente temporário de testes, sem dependência no aplicativo. As capturas ficam no artefato `smartroute-browser-qa` do run por 7 dias.
+
 ## Privacidade e titularidade
 
 Todos os dados de exemplo são fictícios. Nenhuma base corporativa, credencial ou script interno foi incluído. O aplicativo não possui backend, coleta de métricas de uso, cookies próprios ou autenticação. Serviços externos de mapa e CDN recebem requisições normais do navegador.
