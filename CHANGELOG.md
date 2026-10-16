@@ -1,5 +1,10 @@
 # Histórico de versões
 
+## 1.4.1 — 2026-10-16 (Issue #17)
+- Interface visual integrada à família Reliability Lab/Talita Souza: azul petróleo, turquesa, marca TS e favicon vetorial.
+- Banner específico SmartRoute no README e cabeçalho padronizado, sem alterar a lógica de roteirização.
+
+
 ## 1.4.0 — 2026-10-16 (Issue #15)
 - Datas limite válidas passam a definir a primeira ordem de escolha dos grupos, com criticidade e proximidade como desempate.
 - Mantido o agrupamento por unidade, sem adiar grupo mais urgente para preencher vagas ociosas com demandas posteriores.
