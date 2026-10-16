@@ -80,7 +80,7 @@ O workflow **Verify SmartRoute** também cobre, em navegador, filtros, importaç
 
 Nenhuma base operacional ou credencial acompanha esta demonstração. Os dados importados são processados no navegador, mas serviços externos de mapa e bibliotecas podem receber requisições normais de acesso. **Não utilize dados confidenciais em ambiente público sem avaliação e autorização da organização.**
 
-**© 2026 Talita Souza. Todos os direitos reservados.** Diferentemente de projetos licenciados sob MIT, o SmartRoute tem **[termos de uso restrito](LICENSE.md)**: cópia, modificação, redistribuição e uso comercial dos materiais próprios dependem de autorização prévia e escrita, respeitando permissões legais e de terceiros. Tornar o repositório público não concede licença permissiva.
+**© 2026 Talita Souza. Todos os direitos reservados.** Diferentemente de projetos licenciados sob MIT, o SmartRoute tem **[termos de uso restrito](LICENSE.md)**: cópia, modificação, redistribuição e uso comercial dos materiais próprios dependem de autorização prévia e por escrito, respeitando permissões legais e de terceiros. Tornar o repositório público não concede licença permissiva.
 
 ---
 
