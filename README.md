@@ -1,123 +1,89 @@
-![SmartRoute — Identidade Talita Souza](assets/project-banner.svg)
+# SmartRoute · Roteirização e Programação
 
-# SmartRoute | Roteirização personalizável
+**Ferramenta demonstrativa de planejamento de atendimentos, com critérios de prazo, criticidade, equipe e localização.**  
+Desenvolvido por **Talita Souza** · Engenharia de Controle e Automação · PCM, dados e automação
 
-**Desenvolvido por Talita Souza. © 2026 Talita Souza. Todos os direitos reservados.**
+**[Abrir a demonstração online ↗](https://talita-olv.github.io/smart-route/)**
 
-## Acessar o SmartRoute
+[![Testes](https://img.shields.io/badge/testes-Node.js-4ad7be?style=flat-square&logo=nodedotjs&logoColor=black)](tests/) [![Tecnologia](https://img.shields.io/badge/JavaScript-ES%20Modules-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](assets/core.mjs) [![Mapa](https://img.shields.io/badge/mapa-Leaflet%20%2F%20OSM-79aefa?style=flat-square)](docs/REGRAS.md) [![Licença](https://img.shields.io/badge/licen%C3%A7a-uso%20restrito-8794a6?style=flat-square)](LICENSE.md)
 
-### **[ABRIR A DEMONSTRAÇÃO ONLINE ↗](https://talita-olv.github.io/smart-route/)**
+![Prévia ilustrativa do SmartRoute: programação, prazos e distribuição geográfica](docs/overview.svg)
 
-Acesse diretamente no navegador. Experimente os **48 atendimentos fictícios**, ajuste filtros e equipes, visualize a distribuição no mapa de ruas, gere uma programação sugerida e exporte o resultado em CSV. Você também pode baixar a [planilha modelo Excel](exemplos/Modelo_SmartRoute.xlsx) para testar a importação.
+> **Atenção:** projeto demonstrativo independente, com **48 atendimentos inteiramente fictícios**. As distâncias estimadas são em linha reta e a sequência é heurística: **não** representa navegação por vias, tempo de deslocamento, cumprimento automático de SLA ou confirmação de execução. Verifique a programação antes de utilizá-la.
 
-*Esta é uma versão demonstrativa de uma solução desenvolvida por Talita Souza. Integrações com sistemas e regras específicas de cada negócio podem ser desenvolvidas sob medida. As distâncias da programação são estimativas geográficas em linha reta, não percursos viários.*
+## O problema
 
+Distribuir atendimentos somente pela proximidade pode antecipar demandas menos urgentes enquanto outras ultrapassam seus prazos. Além disso, organizar manualmente equipes, unidades e prioridades exige conferências repetitivas.
 
-**Uso restrito:** cópia, modificação, redistribuição e uso comercial do código e dos materiais próprios exigem autorização prévia e por escrito da autora, ressalvadas permissões legais e os termos de terceiros/GitHub. Acesso público não significa licença permissiva. A avaliação da demonstração e o preenchimento dos modelos são permitidos conforme [LICENSE.md](LICENSE.md). Crédito à autora não substitui autorização. Os avisos não garantem proteção absoluta contra cópia.
+O SmartRoute demonstra como organizar a programação **priorizando o vencimento antes da geografia**, sem perder de vista a capacidade e a região dos atendimentos.
 
-**Da planilha à sugestão de roteiros.** Projeto demonstrativo independente de portfólio por **Talita Souza**. O SmartRoute organiza demandas de campo em sugestões de programação por equipe, localização e prioridade. Seu ponto de partida é um modelo genérico; extrações e regras comerciais podem ser desenvolvidas individualmente para cada negócio.
+## O que a demonstração permite
 
-**[Abrir ferramenta online](https://talita-olv.github.io/smart-route/)** · **[Modelo Excel](exemplos/Modelo_SmartRoute.xlsx)** · **[Exemplo CSV](exemplos/Modelo_SmartRoute.csv)** · **[Como publicar](docs/PUBLICAR.md)**
+- Explorar **48 atendimentos fictícios**, distribuídos em 12 grupos locais e 3 equipes.
+- Importar **CSV ou Excel (.xlsx/.xls)**, até 120 registros por arquivo na demonstração pública.
+- Filtrar por segmento, região, tipo de serviço, equipe, situação e prioridade.
+- Planejar por **data limite, criticidade e proximidade**, nessa ordem, por equipe; identificar propostas após o prazo.
+- Manter `grupo_local` junto quando couber na capacidade, ou dividir grupos maiores com aviso.
+- Ajustar ponto de partida, data inicial e até **12 paradas por rota**.
+- Apresentar pontos e sequência aproximada no mapa de ruas, com tentativa de novo carregamento se o serviço externo falhar.
+- Exportar CSV revisável com data, equipe, sequência, informações da ordem e `situacao_prazo`.
+- Executar testes automatizados da lógica e dos fluxos de interface.
 
-**Publicação:** GitHub Pages, branch `main`, após merge de Pull Request. A versão pública está no link em destaque acima.
+## Como utilizar
 
-## Padrão obrigatório de desenvolvimento e deploy
+1. **[Abra o SmartRoute](https://talita-olv.github.io/smart-route/)** e clique em **Recarregar exemplo** ou baixe o [modelo Excel](exemplos/Modelo_SmartRoute.xlsx) / [CSV](exemplos/Modelo_SmartRoute.csv).
+2. Se importar uma planilha, confira os campos obrigatórios: `id`, `latitude`, `longitude`. Os demais campos refinam a programação ou são informativos.
+3. Selecione filtros, data inicial, limite de paradas e ponto de partida.
+4. Clique em **Gerar programação**. Veja as datas e os avisos de atraso — inclusive quando o grupo mais urgente não couber no dia.
+5. Revise os trajetos estimados, as condições operacionais e a capacidade real de trabalho; só então exporte a programação em CSV.
 
-**Toda tarefa futura (Correção, Melhoria, Nova função ou Processo/Documentação) começa com uma [Issue](https://github.com/talita-olv/smart-route/issues), segue em branch própria e chega à `main` somente por [Pull Request](https://github.com/talita-olv/smart-route/pulls) com a Issue real citada na descrição (`Closes #N` ou `Refs #N`).** Testes, revisão e merge antecedem o deploy do GitHub Pages. Não fazer commits diretos na `main`.
+Para uso local, sirva os arquivos por HTTP (não basta abrir módulos ES por `file://`). Exemplo: `npx serve .` ou outro servidor estático. O projeto também pode ser apresentado em HTML independente com `node scripts/build_standalone.mjs`.
 
-**Obrigatório para qualquer agente de IA, independentemente do modelo:** leia [AGENTS.md](AGENTS.md) antes de trabalhar; consulte [CONTRIBUTING.md](CONTRIBUTING.md) para o passo a passo. O template de PR e o CI verificam o vínculo à Issue.
+## Tecnologias e organização
 
-## Para quem serve
+| Tecnologia / arquivo | Aplicação |
+| --- | --- |
+| HTML, CSS e JavaScript ES Modules | Interface, filtros, regras e exportação |
+| `assets/core.mjs` | Validação, prazo, agrupamento, heurística e CSV |
+| `assets/app.mjs` e `assets/demo.mjs` | Interface e exemplos fictícios |
+| Leaflet e OpenStreetMap | Mapa de ruas; **não** fornece roteamento por vias |
+| SheetJS (sob demanda) | Leitura de planilhas Excel; alternativa CSV |
+| GitHub Pages | Demonstração estática |
+| `tests/` e `scripts/check_browser.cjs` | Regressão e testes visuais desktop/mobile |
 
-Assistência técnica, manutenção, instalações, inspeções, coletas, visitas comerciais ou qualquer operação que recebe uma relação de pontos/atendimentos e precisa organizá-la por equipe e dia. Os 48 atendimentos da demonstração são **inteiramente fictícios** e servem apenas para experimentar o fluxo.
+O CSV e a lógica de programação não dependem da disponibilidade do mapa. Bibliotecas e mapas de terceiros podem fazer requisições pela rede; consulte [avisos de terceiros](THIRD_PARTY_NOTICES.md).
 
-## Experimentar
+## Critérios de planejamento e limites
 
-1. Abra o site por GitHub Pages ou execute um servidor HTTP estático no diretório do projeto: `npx serve .` (Node.js) ou outro servidor local de sua preferência. Os módulos JavaScript requerem HTTP; abrir o arquivo `index.html` por `file://` pode não funcionar.
-2. Clique em **Recarregar exemplo** para explorar uma base fictícia ou baixe e edite o **Modelo_SmartRoute.xlsx** na aba **Atendimentos**.
-3. Importe um CSV ou XLSX, selecione os filtros, a data, o limite por rota e as coordenadas de partida.
-4. Clique em **Gerar programação** e revise todos os atendimentos e a ordem sugerida.
-5. Exporte a programação em CSV, se estiver adequada.
+A decisão é **data limite mais próxima → criticidade → distância em linha reta**. O desempate só ocorre entre demandas do mesmo grupo de prioridade temporal. Grupos da mesma unidade permanecem juntos quando a capacidade permite. Em situações de conflito, o sistema **avisa** sobre ordens previstas após o vencimento; não promete que todas as demandas caberão no horizonte.
 
-A versão demonstrativa importa os arquivos no navegador, sem upload para um backend deste projeto. A interface não carrega fontes externas. O mapa de ruas (Leaflet/OpenStreetMap) é a única visualização e carrega automaticamente, sem bloquear o painel; em caso de falha, use o botão de nova tentativa; o leitor SheetJS só é solicitado na importação Excel. Esses recursos exigem internet, mas dados, filtros e geração de roteiros não dependem deles. Se o leitor XLSX externo falhar, use o CSV UTF-8. **Não carregue dados confidenciais na demonstração pública sem avaliar as políticas de sua organização e as requisições de terceiros.**
+- Datas de prazo: `AAAA-MM-DD` ou `DD/MM/AAAA` na importação. Datas inexistentes geram aviso; atendimentos sem prazo válido são tratados depois dos datados.
+- Programação usa dias úteis de segunda a sexta, **sem calendário de feriados**.
+- A duração do serviço informa estimativas de carga, mas não é usada como restrição de turnos.
+- Horários e janelas, tráfego, especialidades, indisponibilidade da equipe e distâncias viárias não são calculados nesta demonstração.
+- Não há importação de dados corporativos, extração automática de ERP/CRM, backend, autenticação ou coleta de métricas própria.
 
-## Funcionalidades disponíveis
+**Personalização sob medida:** a integração com ERP, CRM, sistema de chamados ou scripts de extração específicos requer autorização, análise técnica e um escopo separado. Veja [Integração personalizada](docs/INTEGRACAO_PERSONALIZADA.md) e [regras do algoritmo](docs/REGRAS.md).
 
-- Filtros por termo, segmento, equipe, prioridade e situação.
-- Base fictícia embutida e importação de CSV/XLSX (máximo de 20 MB e 120 linhas na demo).
-- Validação de IDs repetidos e coordenadas geográficas WGS84.
-- Agrupamento de atendimentos da mesma `grupo_local` na mesma rota, quando a capacidade informada permite.
-- Geração de sequência heurística por **menor prazo de vencimento**, com desempate por criticidade e proximidade geográfica, por equipe.
-- Distribuição da carga excedente em dias úteis subsequentes, sem considerar feriados.
-- Alertas e destaque dos atendimentos sugeridos após o vencimento, com situação do prazo exportada em CSV.
-- Destaque de rota no mapa de ruas e exportação revisável em CSV.
-- Mapa de ruas com estado de carregamento e opção de tentar novamente; leitor Excel carregado somente quando necessário.
-- Identidade visual com tons minerais, tipografia de sistema, cantos discretos e apresentação operacional.
-
-**Importante:** o **prazo informado agora influencia a ordem de programação** (AAAA-MM-DD ou DD/MM/AAAA na importação). A ferramenta sinaliza propostas após o vencimento, mas não garante cumprimento de SLA: data é diferente de horário de conclusão; duração, janelas, turnos, feriados e viagens reais ainda não são restrições. As distâncias são apenas em linha reta e a programação é heurística. Ajustes operacionais e roteamento por vias podem integrar versões personalizadas.
-
-## Personalização por negócio
-
-```text
-ERP / CRM / Sistema de chamados / planilha / API autorizada
-         ↓
-Script de extração individualizado
-         ↓
-Validação, tratamento e padronização dos campos
-         ↓
-Modelo SmartRoute (CSV ou Excel)
-         ↓
-Sugestão de roteiros → revisão humana → programação
-```
-
-Cada cliente pode ter um layout de extração próprio, desenvolvido mediante análise das permissões, tecnologia, regras de negócio e proteção de dados aplicáveis. **Não há script de extração empresarial conectado nem autorização implícita para acessar sistemas terceiros nesta demonstração.** Leia [Integração personalizada](docs/INTEGRACAO_PERSONALIZADA.md).
-
-## Estrutura, como no projeto Mapa de 52 Semanas
-
-| Caminho | Conteúdo |
-|---|---|
-| `index.html` | Aplicação web demonstrativa e apresentação do projeto |
-| `assets/style.css` | Identidade visual e layout responsivo |
-| `assets/core.mjs` | Validação, agrupamento, cálculo estimado e exportação |
-| `assets/app.mjs` | Interface, importação de arquivo, filtros e mapa |
-| `assets/demo.mjs` | Atendimentos fictícios para teste imediato |
-| `exemplos/Modelo_SmartRoute.xlsx` | Planilha base pronta para editar |
-| `exemplos/Modelo_SmartRoute.csv` | Exemplo do contrato em texto |
-| `docs/REGRAS.md` | Critérios e limites da demonstração |
-| `docs/INTEGRACAO_PERSONALIZADA.md` | Campos e escopo de scripts por cliente |
-| `docs/PUBLICAR.md` | Repositório novo e GitHub Pages |
-| `docs/VALIDACAO.md` | Checklist de revisão para publicação |
-| `tests/core.test.mjs` | Testes automatizados de regras centrais |
-| `.nojekyll` | Publicação direta dos arquivos no Pages |
-
-## HTML de demonstração em um arquivo
-
-Execute `node scripts/build_standalone.mjs` para gerar `SmartRoute_Demonstracao.html`. Ele incorpora CSS e JavaScript próprio; os modelos Excel/CSV permanecem disponíveis na pasta `exemplos` quando a aplicação é publicada. A biblioteca Leaflet, os tiles OpenStreetMap, o leitor Excel continuam dependendo de internet, conforme a seção de privacidade; a roteirização e o CSV podem funcionar sem mapa e sem leitor XLSX. O arquivo gerado é uma conveniência de apresentação, não é necessário para o GitHub Pages.
-
-## Testes
+## Testes e contribuição
 
 ```bash
 node --test tests/*.test.mjs
+node scripts/build_standalone.mjs
 ```
 
-Os testes automatizados cobrem leitura CSV, duplicatas, coordenadas, grupos, status, limite diário, **priorização de prazo, alertas de atraso, datas inválidas**, exportação, proteção básica contra fórmulas em CSV e verificação de sintaxe, elementos da interface, mapa de ruas, falha/nova tentativa e carregamento do leitor Excel sob demanda. Uma demonstração visual no navegador e os fluxos de importação devem ser conferidos antes da divulgação; consulte [Validação](docs/VALIDACAO.md).
+O workflow **Verify SmartRoute** também cobre, em navegador, filtros, importação, geração, exportação e layout desktop/mobile. Consulte a [validação](docs/VALIDACAO.md) e o [histórico de versões](CHANGELOG.md).
 
-O workflow **Verify SmartRoute** também executa `scripts/check_browser.cjs` no job `browser-qa`: desktop, 390/320 px, importação CSV/XLSX, filtros, geração, exportação e recuperação do mapa. O Playwright é instalado somente no ambiente temporário de testes, sem dependência no aplicativo. As capturas ficam no artefato `smartroute-browser-qa` do run por 7 dias.
+**Processo obrigatório:** [Issue](https://github.com/talita-olv/smart-route/issues) → branch → testes → [Pull Request](https://github.com/talita-olv/smart-route/pulls) vinculado à Issue → revisão → merge na `main` → GitHub Pages. Instruções completas: [AGENTS.md](AGENTS.md) e [CONTRIBUTING.md](CONTRIBUTING.md). Não executar mudanças diretas em produção.
 
-## Privacidade e titularidade
+## Privacidade, licença e autoria
 
-Todos os dados de exemplo são fictícios. Nenhuma base corporativa, credencial ou script interno foi incluído. O aplicativo não possui backend, coleta de métricas de uso, cookies próprios ou autenticação. Serviços externos de mapa e CDN recebem requisições normais do navegador.
+Nenhuma base operacional ou credencial acompanha esta demonstração. Os dados importados são processados no navegador, mas serviços externos de mapa e bibliotecas podem receber requisições normais de acesso. **Não utilize dados confidenciais em ambiente público sem avaliação e autorização da organização.**
 
-**© 2026 Talita Souza. Todos os direitos reservados.** Este repositório é uma demonstração para avaliação, não uma licença de reutilização comercial do código. Para adaptações e integrações personalizadas, entre em contato pela página do perfil no [GitHub](https://github.com/talita-olv). Veja [LICENSE.md](LICENSE.md) e [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-## Demonstração V1.3 e personalização
+**© 2026 Talita Souza. Todos os direitos reservados.** Diferentemente de projetos licenciados sob MIT, o SmartRoute tem **[termos de uso restrito](LICENSE.md)**: cópia, modificação, redistribuição e uso comercial dos materiais próprios dependem de autorização prévia e por escrito, respeitando permissões legais e de terceiros. Tornar o repositório público não concede licença permissiva.
 
-O exemplo contém **48 casos fictícios** (12 unidades e 3 equipes), com **22 colunas** compatíveis entre Excel e CSV. Importação na experiência pública: até **120 atendimentos por arquivo** e **1–12 paradas por rota**. Os campos `id`, `latitude` e `longitude` são obrigatórios; há filtros por região e tipo de serviço. O mapa de ruas carrega automaticamente a biblioteca Leaflet e os tiles OpenStreetMap. Não há visualização rápida/SVG. Se a conexão falhar, o aviso e a nova tentativa aparecem; o painel, importação, geração de rotas e exportação CSV continuam disponíveis.
+---
 
-Influenciam o algoritmo de exemplo: equipe, unidade (`grupo_local`), situação elegível, **data limite (prazo primeiro)**, prioridade, coordenadas, ponto de partida, capacidade por rota e data inicial. Grupos são preservados quando viáveis. Havendo falta de capacidade, demandas com prazo posterior não passam à frente de um grupo urgente só para preencher vagas livres. Sem prazo válido, o atendimento vem após os datados e é sinalizado; sugestões além do vencimento geram alerta. `duracao_min` alimenta o resumo, mas **não restringe** a composição; janelas horárias, tipo de serviço, endereço-referência, região, origem e observação continuam informativos/para filtros e exportação. Não há promessas de percursos viários, trânsito, SLA ou integração pronta.
+**Identidade visual:** [marca Talita Souza](assets/talita-brand.svg) · [banner do SmartRoute](assets/project-banner.svg) · [template de README](https://github.com/talita-olv/talita-olv/blob/main/README_TEMPLATE.md)
 
-Extração automatizada, importações maiores, regras específicas, janelas e roteirização viária são exemplos de serviço sob medida. O limite público é de demonstração, **não é controle de segurança ou bloqueio de uso do código publicado**.
-
-
-### Identidade visual do portfólio
-
-Este projeto integra a família de soluções **Talita Souza — Engenharia, Dados e Automação**. Cores e símbolo são compartilhados com o Mapa 52 Semanas e Reliability Lab; o nome e o propósito de cada sistema permanecem distintos. Marca vetorial: [Talita Souza](assets/talita-brand.svg). © 2026 Talita Souza.
+Desenvolvido por **[Talita Souza](https://github.com/talita-olv)** · [LinkedIn](https://www.linkedin.com/in/talita-souza-136590122/)
