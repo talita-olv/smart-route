@@ -1,3 +1,5 @@
+![SmartRoute — Identidade Talita Souza](assets/project-banner.svg)
+
 # SmartRoute | Roteirização personalizável
 
 **Desenvolvido por Talita Souza. © 2026 Talita Souza. Todos os direitos reservados.**
@@ -114,3 +116,8 @@ O exemplo contém **48 casos fictícios** (12 unidades e 3 equipes), com **22 co
 Influenciam o algoritmo de exemplo: equipe, unidade (`grupo_local`), situação elegível, **data limite (prazo primeiro)**, prioridade, coordenadas, ponto de partida, capacidade por rota e data inicial. Grupos são preservados quando viáveis. Havendo falta de capacidade, demandas com prazo posterior não passam à frente de um grupo urgente só para preencher vagas livres. Sem prazo válido, o atendimento vem após os datados e é sinalizado; sugestões além do vencimento geram alerta. `duracao_min` alimenta o resumo, mas **não restringe** a composição; janelas horárias, tipo de serviço, endereço-referência, região, origem e observação continuam informativos/para filtros e exportação. Não há promessas de percursos viários, trânsito, SLA ou integração pronta.
 
 Extração automatizada, importações maiores, regras específicas, janelas e roteirização viária são exemplos de serviço sob medida. O limite público é de demonstração, **não é controle de segurança ou bloqueio de uso do código publicado**.
+
+
+### Identidade visual do portfólio
+
+Este projeto integra a família de soluções **Talita Souza — Engenharia, Dados e Automação**. Cores e símbolo são compartilhados com o Mapa 52 Semanas e Reliability Lab; o nome e o propósito de cada sistema permanecem distintos. Marca vetorial: [Talita Souza](assets/talita-brand.svg). © 2026 Talita Souza.
