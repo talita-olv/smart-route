@@ -1,5 +1,12 @@
 # Histórico de versões
 
+## 1.4.0 — 2026-10-16 (Issue #15)
+- Datas limite válidas passam a definir a primeira ordem de escolha dos grupos, com criticidade e proximidade como desempate.
+- Mantido o agrupamento por unidade, sem adiar grupo mais urgente para preencher vagas ociosas com demandas posteriores.
+- Avisos de programação após o prazo, prazo ausente/inválido e nova coluna `situacao_prazo` na exportação; destaque visual de atraso.
+- Reconhecimento de AAAA-MM-DD e DD/MM/AAAA; fins de semana sem programação, calendário de feriados e turnos fora do escopo.
+
+
 ## 1.3.2 — 2026-10-01
 - Corrigida a área de resultados: a tabela volta a ter rolagem interna, mas agora preenche todo o espaço disponível no painel ao lado dos filtros.
 - Cabeçalho permanece fixo durante o deslizamento; desktop mantém painéis alinhados e mobile usa altura adaptada à viewport.

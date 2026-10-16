@@ -45,13 +45,14 @@ A versão demonstrativa importa os arquivos no navegador, sem upload para um bac
 - Base fictícia embutida e importação de CSV/XLSX (máximo de 20 MB e 120 linhas na demo).
 - Validação de IDs repetidos e coordenadas geográficas WGS84.
 - Agrupamento de atendimentos da mesma `grupo_local` na mesma rota, quando a capacidade informada permite.
-- Geração de sequência heurística por proximidade com ponderação de prioridade, por equipe.
+- Geração de sequência heurística por **menor prazo de vencimento**, com desempate por criticidade e proximidade geográfica, por equipe.
 - Distribuição da carga excedente em dias úteis subsequentes, sem considerar feriados.
+- Alertas e destaque dos atendimentos sugeridos após o vencimento, com situação do prazo exportada em CSV.
 - Destaque de rota no mapa de ruas e exportação revisável em CSV.
 - Mapa de ruas com estado de carregamento e opção de tentar novamente; leitor Excel carregado somente quando necessário.
 - Identidade visual com tons minerais, tipografia de sistema, cantos discretos e apresentação operacional.
 
-**Importante:** a distância apresentada é em linha reta entre coordenadas. Não representa percurso viário, previsão de tráfego, melhor tempo, SLA, navegação GPS ou otimização matematicamente exata. Janelas horárias, prazo e duração do serviço são campos de entrada informativos nesta demonstração; não são restrições aplicadas no cálculo. Regras operacionais e cálculo viário real podem integrar uma versão personalizada.
+**Importante:** o **prazo informado agora influencia a ordem de programação** (AAAA-MM-DD ou DD/MM/AAAA na importação). A ferramenta sinaliza propostas após o vencimento, mas não garante cumprimento de SLA: data é diferente de horário de conclusão; duração, janelas, turnos, feriados e viagens reais ainda não são restrições. As distâncias são apenas em linha reta e a programação é heurística. Ajustes operacionais e roteamento por vias podem integrar versões personalizadas.
 
 ## Personalização por negócio
 
@@ -97,7 +98,7 @@ Execute `node scripts/build_standalone.mjs` para gerar `SmartRoute_Demonstracao.
 node --test tests/*.test.mjs
 ```
 
-Os testes automatizados cobrem leitura CSV, duplicatas, coordenadas, grupos, status, limite diário, exportação, proteção básica contra fórmulas em CSV e verificação de sintaxe, elementos da interface, mapa de ruas, falha/nova tentativa e carregamento do leitor Excel sob demanda. Uma demonstração visual no navegador e os fluxos de importação devem ser conferidos antes da divulgação; consulte [Validação](docs/VALIDACAO.md).
+Os testes automatizados cobrem leitura CSV, duplicatas, coordenadas, grupos, status, limite diário, **priorização de prazo, alertas de atraso, datas inválidas**, exportação, proteção básica contra fórmulas em CSV e verificação de sintaxe, elementos da interface, mapa de ruas, falha/nova tentativa e carregamento do leitor Excel sob demanda. Uma demonstração visual no navegador e os fluxos de importação devem ser conferidos antes da divulgação; consulte [Validação](docs/VALIDACAO.md).
 
 O workflow **Verify SmartRoute** também executa `scripts/check_browser.cjs` no job `browser-qa`: desktop, 390/320 px, importação CSV/XLSX, filtros, geração, exportação e recuperação do mapa. O Playwright é instalado somente no ambiente temporário de testes, sem dependência no aplicativo. As capturas ficam no artefato `smartroute-browser-qa` do run por 7 dias.
 
@@ -110,6 +111,6 @@ Todos os dados de exemplo são fictícios. Nenhuma base corporativa, credencial 
 
 O exemplo contém **48 casos fictícios** (12 unidades e 3 equipes), com **22 colunas** compatíveis entre Excel e CSV. Importação na experiência pública: até **120 atendimentos por arquivo** e **1–12 paradas por rota**. Os campos `id`, `latitude` e `longitude` são obrigatórios; há filtros por região e tipo de serviço. O mapa de ruas carrega automaticamente a biblioteca Leaflet e os tiles OpenStreetMap. Não há visualização rápida/SVG. Se a conexão falhar, o aviso e a nova tentativa aparecem; o painel, importação, geração de rotas e exportação CSV continuam disponíveis.
 
-Influenciam o algoritmo de exemplo: equipe, unidade (`grupo_local`), situação elegível, prioridade, coordenadas, ponto de partida, capacidade por rota e data inicial. `duracao_min` alimenta o resumo, mas **não restringe** a composição; prazo, janelas horárias, tipo de serviço, endereço-referência, região, origem e observação são campos informativos/para filtros e exportação. Não há promessas de percursos viários, trânsito, SLA ou integração pronta.
+Influenciam o algoritmo de exemplo: equipe, unidade (`grupo_local`), situação elegível, **data limite (prazo primeiro)**, prioridade, coordenadas, ponto de partida, capacidade por rota e data inicial. Grupos são preservados quando viáveis. Havendo falta de capacidade, demandas com prazo posterior não passam à frente de um grupo urgente só para preencher vagas livres. Sem prazo válido, o atendimento vem após os datados e é sinalizado; sugestões além do vencimento geram alerta. `duracao_min` alimenta o resumo, mas **não restringe** a composição; janelas horárias, tipo de serviço, endereço-referência, região, origem e observação continuam informativos/para filtros e exportação. Não há promessas de percursos viários, trânsito, SLA ou integração pronta.
 
 Extração automatizada, importações maiores, regras específicas, janelas e roteirização viária são exemplos de serviço sob medida. O limite público é de demonstração, **não é controle de segurança ou bloqueio de uso do código publicado**.
