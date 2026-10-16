@@ -32,8 +32,9 @@ test('não usa folga de capacidade para preterir grupo mais urgente',()=>{
    sample('V1','URG2','2026-10-03'),sample('V2','URG2','2026-10-03'),
    sample('W1','FUTURO','2026-10-10')];
  const {routes}=buildRoutes(data,{startDate:'2026-10-01',maxStops:3});
- assert.deepEqual(routes.map(r=>r.stops.map(s=>s.id)),[['U1','U2'],['V1','V2'],['W1']]);
- assert.deepEqual(routes.map(r=>r.data),['2026-10-01','2026-10-02','2026-10-05']);
+ assert.deepEqual(routes.map(r=>r.stops.map(s=>s.id)),[['U1','U2'],['V1','V2','W1']]);
+ assert.deepEqual(routes.map(r=>r.data),['2026-10-01','2026-10-02']);
+ assert.ok(routes[1].stops.findIndex(s=>s.id==='V1')<routes[1].stops.findIndex(s=>s.id==='W1'));// Prazo posterior não passa na frente do grupo urgente.
 });
 test('fim de semana não recebe programação; vencimento impossível gera alerta',()=>{
  const {routes,warnings}=buildRoutes([sample('SAB','G','2026-10-04')],{startDate:'2026-10-03',maxStops:1});
