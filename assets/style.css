@@ -102,3 +102,31 @@ footer>div{max-width:560px}footer strong{display:block;color:#fff;font-size:13px
     overflow-y:auto;
   }
 }
+
+/* Identidade unificada Talita Souza — Reliability Lab · SmartRoute · Mapa 52 */
+:root{--navy:#081b2e;--navy2:#0d1a29;--mint:#4ad7be;--mintp:#163b43;--ink:#edf5f9;--muted:#a0b7c8;--border:#264255;--canvas:#08111c;--radius:11px}
+body{background:var(--canvas);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,.brand{font-family:inherit}
+.topbar{background:#0a1522;border-color:var(--border)}.brand{color:#edf5f9}.brandmark{width:48px;height:48px;background:transparent;border:0;padding:0}.brandmark img{width:48px;height:48px;display:block}.brand-word>span,.brand-word small{color:var(--mint)}.topbar nav{color:#c4d8e2}.topbar nav .nav-download{border-color:#38576d;color:#edf5f9}
+.hero{color:var(--ink);background:linear-gradient(115deg,#0a1727,#0b2d4f 75%,#103846);border:1px solid var(--border);border-radius:0 0 15px 15px;margin-top:0}.hero p{color:#b3cad8}.hero .primary,.primary{background:var(--mint);color:#082b32}.hero .primary:hover,.primary:hover{background:#7debd8;color:#082b32}.hero .secondary{color:#edf5f9;border-color:#527287;background:#132d41}.hero .secondary:hover{background:#1a4152}.hero .hero-note,.author-signature,.author-signature span{color:#b3cad8!important}.author-signature{border-left-color:var(--mint)}
+.workflow-preview,.stat,.panel,.insight,.route-card,.info-panel,.scope-grid article{background:#0e1d2d;border-color:var(--border);color:#edf5f9;box-shadow:none}
+.workflow-head,.workflow-row>b,.workflow-row div span,.workflow-foot,.stat span,.insight header span,.route-meta span,.stop small,.scope-grid span,.scope-note{color:#9eb7c9}
+.section-top .muted,.result-heading .muted,.muted,.info-panel p,.demo-scope p,.scope-grid span{color:#a2bac9}
+.panel h3 span,.route-card header strong,.route-meta b,.stat strong,.insight strong,.bar-row b,.scope-grid strong{color:#edf5f9}
+.insight header strong{color:#edf5f9}.bar-row{color:#a9c1d1}.bar-track{background:#243a4e}
+.filters label,.filters .helper,.map-tools,.geo-legend{color:#a5bdc9}
+.filters input,.filters select{background:#14283a;color:#edf5f9;border-color:#355064}
+.filters input::placeholder{color:#98afbe}.filters input:focus,.filters select:focus{outline-color:var(--mint);border-color:var(--mint)}
+.outlined,.route-card>button,.map-tools button,.scope-contact{background:#183246!important;border-color:#426477!important;color:#ddf1f6!important}
+.outlined:hover,.route-card>button:hover,.map-tools button:hover{background:#234b5f!important}
+.map-status,.map-status.ready{background:#17392f;color:#87efc9;border-color:#365c56}.map-status.error{background:#533027;color:#ffb6a7}
+.notice{background:#17392f;border-color:#3f705e;color:#b3f5d9}.notice.warn{background:#4c3424;border-color:#9f6845;color:#ffd3a2}
+th{background:#153046;color:#d7e7f1}td,th{border-bottom-color:#294355}tbody tr:hover{background:#19384a}
+.priority{background:#234455;color:#dcecf2}.priority.Crítica{background:#572a33;color:#ffb4bf}.priority.Alta{background:#573f24;color:#ffdb99}.priority.Média{background:#1a3c5b;color:#bfdcff}
+.route-card header span{color:var(--mint);background:#14383b}.route-selected{outline-color:var(--mint)}
+.stop-num{background:#245b68}.stop.overdue{background:#4f2930;border-left-color:#ff7885}.stop.overdue small{color:#ffb7c0}
+.info-panel.mint,.demo-scope,.note{background:#102c3b;border-color:#31566a}.steps p{border-color:#28475b}.steps b{color:var(--mint)}.pipeline{background:#183b47;color:#c4f5e8!important}
+.geo-legend{color:#aac5d1}.empty{background:#12283a;color:#b1c6d2;border-color:#355165}
+.map-message{background:#17303d;color:#e1eef0}#map,#street-map{background:#17313e;border-color:#365769}
+footer{background:#061420;border-top:1px solid #2d4c5e}footer a{color:#90ebd9}
+@media(max-width:630px){.brand-word small{font-size:8px}.topbar nav .nav-download{font-size:9px}}
